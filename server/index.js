@@ -17,9 +17,10 @@ const io = socketIo(server, {
 })
 
 io.on('connection', socket => {
-  console.log('connetcion', socket.id);
+  console.log('connection', socket.id);
   socket.on('join-room', (roomId, userId) => {
     //adiciona os usuarios na mesma sala
+    console.log('join', roomId, userId);
     socket.join(roomId);
     socket.to(roomId).broadcast.emit('user-connected', userId);
     socket.on('disconnect', () => {
